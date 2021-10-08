@@ -2,8 +2,8 @@ name: Build yt-dlp on Mac OS
 
 on: 
   workflow_dispatch:
-  #release:
-  #  types: [published]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -14,23 +14,17 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install source
-        run: git clone https://github.com/yt-dlp/yt-dlp.git
+        run: git clone --depth 1 https://github.com/yt-dlp/yt-dlp.git
 
       - name: Install build dependencies
-        run: |
-            #brew install pip3
-            pip3 install Pyinstaller mutagen pycryptodomex websockets
+        run: pip3 install Pyinstaller mutagen pycryptodomex websockets
 
       - name: Create package
         run: |
-            #pyinstaller --onefile -n yt-dlp yt_dlp/__main__.py
             cp pyinst-mac.py yt-dlp
             cd yt-dlp
             python3 ./pyinst-mac.py
             chmod 755 dist/yt-dlp
-
-      - name: List
-        run: ls -l yt-dlp/dist/
 
       - name: Create artifact
         if: github.event_name != 'release'
