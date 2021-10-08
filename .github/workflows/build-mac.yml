@@ -32,3 +32,13 @@ jobs:
         with:
           name: yt-dlp
           path: yt-dlp/dist/yt-dlp
+
+      - name: Upload package to release
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: yt-dlp/dist/yt-dlp
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
