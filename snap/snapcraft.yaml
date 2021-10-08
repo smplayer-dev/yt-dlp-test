@@ -1,0 +1,39 @@
+name: yt-dlp
+summary: A youtube-dl fork with additional features and fixes
+description: |
+  yt-dlp is a youtube-dl fork based on the now inactive youtube-dlc. The
+  main focus of this project is adding new features and patches while
+  also keeping up to date with the original project
+base: core20
+confinement: strict
+grade: stable
+adopt-info: yt-dlp
+
+apps:
+  yt-dlp:
+    command: usr/bin/yt-dlp
+    plugs:
+      - network
+    #  - home
+    #environment:
+    #  LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+
+parts:
+  yt-dlp:
+    plugin: nil
+    override-build: |
+        wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+        chmod 755 yt-dlp
+        snapcraftctl set-version "`./yt-dlp --version`"
+        install -m 755 yt-dlp ${SNAPCRAFT_PART_INSTALL}/usr/bin/
+    build-packages:
+      - wget
+    stage-packages:
+      - python3
+
+  #ffmpeg:
+  #  plugin: nil
+  #  stage-packages:
+  #    - ffmpeg
+  #    - freeglut3
+  #    - libglu1-mesa
