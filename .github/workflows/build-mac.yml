@@ -25,21 +25,21 @@ jobs:
             cd yt-dlp
             python3 ./pyinst-mac.py
             chmod 755 dist/yt-dlp
-            mv dist/yt-dlp dist/yt-dlp-mac
+            mv dist/yt-dlp dist/yt-dlp-macos
 
       - name: Create artifact
         if: github.event_name != 'release'
         uses: actions/upload-artifact@v2
         with:
-          name: yt-dlp-mac
-          path: yt-dlp/dist/yt-dlp-mac
+          name: yt-dlp-macos
+          path: yt-dlp/dist/yt-dlp-macos
 
       - name: Upload package to release
         if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: yt-dlp/dist/yt-dlp-mac
+          file: yt-dlp/dist/yt-dlp-macos
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
