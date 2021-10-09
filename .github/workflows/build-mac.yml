@@ -17,7 +17,7 @@ jobs:
         run: git clone --depth 1 https://github.com/yt-dlp/yt-dlp.git
 
       - name: Install build dependencies
-        run: pip3 install Pyinstaller mutagen pycryptodomex websockets
+        run: pip3 install Pyinstaller mutagen pycryptodomex websockets certifi
 
       - name: Create package
         run: |
