@@ -7,7 +7,8 @@ on:
 
 jobs:
   build:
-    runs-on: macos-10.15
+    #runs-on: macos-10.15
+    runs-on: macos-11
 
     steps:
       - name: Checkout
@@ -17,13 +18,14 @@ jobs:
         run: git clone --depth 1 https://github.com/yt-dlp/yt-dlp.git
 
       - name: Install build dependencies
-        run: pip3 install Pyinstaller mutagen pycryptodomex websockets certifi
+        run: /usr/bin/pip3 install --user Pyinstaller mutagen pycryptodomex websockets certifi
 
       - name: Create package
         run: |
             cp pyinst.py yt-dlp
             cd yt-dlp
-            python3 ./pyinst.py
+            #/usr/bin/python3 ./pyinst.py
+            /usr/bin/python3 ./pyinst.py --target-architecture universal2 --onefile
 
       - name: Create artifact
         if: github.event_name != 'release'
