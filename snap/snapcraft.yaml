@@ -14,9 +14,9 @@ apps:
     command: usr/bin/yt-dlp
     plugs:
       - network
-    #  - home
-    #environment:
-    #  LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+      - home
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
 
 parts:
   yt-dlp:
@@ -31,9 +31,9 @@ parts:
     stage-packages:
       - python3
 
-  #ffmpeg:
-  #  plugin: nil
-  #  stage-packages:
-  #    - ffmpeg
-  #    - freeglut3
-  #    - libglu1-mesa
+  ffmpeg:
+    plugin: nil
+    stage-packages:
+      - ffmpeg
+      - freeglut3
+      - libglu1-mesa
